@@ -23,19 +23,20 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Enter a users Github UserName to view their repositories"
+            android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="match_parent"
+            android:id="@+id/editTextGithubUserName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Github Username"
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:id="@+id/proceedButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Proceed" />
     </LinearLayout>
