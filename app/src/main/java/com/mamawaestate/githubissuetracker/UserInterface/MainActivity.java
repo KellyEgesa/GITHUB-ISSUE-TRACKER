@@ -1,8 +1,10 @@
-package com.mamawaestate.githubissuetracker;
+package com.mamawaestate.githubissuetracker.UserInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.mamawaestate.githubissuetracker.R;
 
 public class MainActivity extends AppCompatActivity {
 
