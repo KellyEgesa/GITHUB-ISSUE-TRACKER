@@ -2,8 +2,10 @@ package com.mamawaestate.githubissuetracker.UserInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,12 +19,22 @@ public class UserNameActivity extends AppCompatActivity {
     Button mProceedButton;
     @BindView(R.id.editTextGithubUserName)
     EditText mGitHubUserName;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_name);
         ButterKnife.bind(this);
+
+        loadingScreen();
+
+        mProceedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchGitHubUserName();
+            }
+        });
     }
 
     private void searchGitHubUserName(){
@@ -45,6 +57,14 @@ public class UserNameActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    private void loadingScreen(){
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Searching");
+        progressDialog.setMessage("Searching for user with the given username");
+        progressDialog.setCancelable(false);
+    }
+
 
 
 }
