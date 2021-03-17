@@ -1,11 +1,11 @@
-package com.mamawaestate.githubissuetracker.UserInterface;
+package com.savannahInformatics.githubissuetracker.UserInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.mamawaestate.githubissuetracker.R;
+import com.savannahInformatics.githubissuetracker.R;
 
 import butterknife.BindView;
 

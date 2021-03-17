@@ -1,4 +1,4 @@
-package com.mamawaestate.githubissuetracker;
+package com.savannahInformatics.githubissuetracker;
 
 import android.content.Context;
 

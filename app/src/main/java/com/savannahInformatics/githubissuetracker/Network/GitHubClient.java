@@ -1,6 +1,6 @@
-package com.mamawaestate.githubissuetracker.Network;
+package com.savannahInformatics.githubissuetracker.Network;
 
-import com.mamawaestate.githubissuetracker.Constants;
+import com.savannahInformatics.githubissuetracker.Constants;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

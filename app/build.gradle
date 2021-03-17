@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.mamawaestate.githubissuetracker"
+        applicationId "com.savannahInformatics.githubissuetracker"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1

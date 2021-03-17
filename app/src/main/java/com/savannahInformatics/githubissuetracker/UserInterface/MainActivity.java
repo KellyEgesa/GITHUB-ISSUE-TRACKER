@@ -1,10 +1,10 @@
-package com.mamawaestate.githubissuetracker.UserInterface;
+package com.savannahInformatics.githubissuetracker.UserInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.mamawaestate.githubissuetracker.R;
+import com.savannahInformatics.githubissuetracker.R;
 
 public class MainActivity extends AppCompatActivity {
 

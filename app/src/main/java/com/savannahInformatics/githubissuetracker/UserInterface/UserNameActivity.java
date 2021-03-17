@@ -1,4 +1,4 @@
-package com.mamawaestate.githubissuetracker.UserInterface;
+package com.savannahInformatics.githubissuetracker.UserInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.mamawaestate.githubissuetracker.R;
+import com.savannahInformatics.githubissuetracker.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
