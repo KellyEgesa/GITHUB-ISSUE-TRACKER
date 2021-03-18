@@ -1,6 +1,7 @@
 package com.savannahInformatics.githubissuetracker.Network;
 
 import com.savannahInformatics.githubissuetracker.Models.GitHubUserDetails;
+import com.savannahInformatics.githubissuetracker.Models.GitHubUserRepo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,6 +12,6 @@ public interface GithubIssueTracker {
     Call<GitHubUserDetails> checkUser(@Path("username") String username);
 
     @GET("users/{username}/repos")
-    Call getUserRepos(@Path("username") String username);
+    Call<GitHubUserRepo> getUserRepos(@Path("username") String username);
 
 }

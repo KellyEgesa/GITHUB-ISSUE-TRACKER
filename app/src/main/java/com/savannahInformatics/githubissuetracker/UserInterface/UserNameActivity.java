@@ -11,9 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.savannahInformatics.githubissuetracker.Models.GitHubUserDetails;
+import com.savannahInformatics.githubissuetracker.Models.GitHubUserRepo;
 import com.savannahInformatics.githubissuetracker.Network.GitHubClient;
 import com.savannahInformatics.githubissuetracker.Network.GithubIssueTracker;
 import com.savannahInformatics.githubissuetracker.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +60,7 @@ public class UserNameActivity extends AppCompatActivity {
         call.enqueue(new Callback<GitHubUserDetails>() {
             @Override
             public void onResponse(Call<GitHubUserDetails> call, Response<GitHubUserDetails> response) {
-
+                getRepos(username);
             }
 
             @Override
@@ -64,11 +68,6 @@ public class UserNameActivity extends AppCompatActivity {
                 Toast.makeText(UserNameActivity.this, "User not Found", Toast.LENGTH_LONG).show();
             }
         });
-
-
-        Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
-        intent.putExtra("githubUserName", username);
-        startActivity(intent);
     }
 
 
@@ -87,23 +86,25 @@ public class UserNameActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
     }
 
-    private void getRepos(String username){
+    private void getRepos(String username) {
         GithubIssueTracker client = GitHubClient.urlRequest();
-        Call<GitHubUserDetails> call = client.getUserRepos(username);
+        Call<GitHubUserRepo> call = client.getUserRepos(username);
 
-        call.enqueue(new Callback<GitHubUserDetails>() {
+        call.enqueue(new Callback<GitHubUserRepo>() {
             @Override
-            public void onResponse(Call<GitHubUserDetails> call, Response<GitHubUserDetails> response) {
-
+            public void onResponse(Call<GitHubUserRepo> call, Response<GitHubUserRepo> response) {
+                Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
+                List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>)response.body();
+                intent.putExtra("githubUserName", username);
+                startActivity(intent);
             }
 
             @Override
-            public void onFailure(Call<GitHubUserDetails> call, Throwable t) {
-
+            public void onFailure(Call<GitHubUserRepo> call, Throwable t) {
+                Toast.makeText(UserNameActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
     }
-
 
 
 }
