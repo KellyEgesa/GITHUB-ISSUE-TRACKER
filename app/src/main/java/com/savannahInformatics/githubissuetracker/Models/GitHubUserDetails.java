@@ -4,6 +4,9 @@ package com.savannahInformatics.githubissuetracker.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class GitHubUserDetails {
 
     @SerializedName("login")
@@ -63,9 +66,7 @@ public class GitHubUserDetails {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("company")
-    @Expose
-    private Object company;
+
     @SerializedName("blog")
     @Expose
     private String blog;
@@ -74,16 +75,11 @@ public class GitHubUserDetails {
     private String location;
     @SerializedName("email")
     @Expose
-    private Object email;
-    @SerializedName("hireable")
-    @Expose
-    private Object hireable;
+    private String email;
     @SerializedName("bio")
     @Expose
     private String bio;
-    @SerializedName("twitter_username")
-    @Expose
-    private Object twitterUsername;
+
     @SerializedName("public_repos")
     @Expose
     private Integer publicRepos;
@@ -166,13 +162,9 @@ public class GitHubUserDetails {
         this.type = type;
         this.siteAdmin = siteAdmin;
         this.name = name;
-        this.company = company;
         this.blog = blog;
         this.location = location;
-        this.email = email;
-        this.hireable = hireable;
         this.bio = bio;
-        this.twitterUsername = twitterUsername;
         this.publicRepos = publicRepos;
         this.publicGists = publicGists;
         this.followers = followers;
@@ -333,13 +325,7 @@ public class GitHubUserDetails {
         this.name = name;
     }
 
-    public Object getCompany() {
-        return company;
-    }
 
-    public void setCompany(Object company) {
-        this.company = company;
-    }
 
     public String getBlog() {
         return blog;
@@ -361,32 +347,12 @@ public class GitHubUserDetails {
         return email;
     }
 
-    public void setEmail(Object email) {
-        this.email = email;
-    }
-
-    public Object getHireable() {
-        return hireable;
-    }
-
-    public void setHireable(Object hireable) {
-        this.hireable = hireable;
-    }
-
     public String getBio() {
         return bio;
     }
 
     public void setBio(String bio) {
         this.bio = bio;
-    }
-
-    public Object getTwitterUsername() {
-        return twitterUsername;
-    }
-
-    public void setTwitterUsername(Object twitterUsername) {
-        this.twitterUsername = twitterUsername;
     }
 
     public Integer getPublicRepos() {

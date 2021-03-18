@@ -63,12 +63,17 @@ public class UserNameActivity extends AppCompatActivity {
         call.enqueue(new Callback<GitHubUserDetails>() {
             @Override
             public void onResponse(Call<GitHubUserDetails> call, Response<GitHubUserDetails> response) {
-                getRepos(username);
+                if(response.isSuccessful()){
+                    getRepos(username, response.body());
+                }
+                else {
+                    Toast.makeText(UserNameActivity.this, "User not Found", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onFailure(Call<GitHubUserDetails> call, Throwable t) {
-                Toast.makeText(UserNameActivity.this, "User not Found", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserNameActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -89,18 +94,25 @@ public class UserNameActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
     }
 
-    private void getRepos(String username) {
+    private void getRepos(String username, GitHubUserDetails userDetails) {
         GithubIssueTracker client = GitHubClient.urlRequest();
         Call<List<GitHubUserRepo>> call = client.getUserRepos(username);
 
         call.enqueue(new Callback<List<GitHubUserRepo>>() {
             @Override
             public void onResponse(Call<List<GitHubUserRepo>> call, Response<List<GitHubUserRepo>> response) {
-                Log.d("Response", response.body().toString());
-                Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
-                List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>) response.body();
-                intent.putExtra("githubUserRepo", Parcels.wrap(userRepos));
-                startActivity(intent);
+                if(response.isSuccessful()){
+                    Log.d("Response", response.body().toString());
+                    Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
+                    List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>) response.body();
+                    intent.putExtra("githubUserDetails", Parcels.wrap(userDetails));
+                    intent.putExtra("githubUserRepo", Parcels.wrap(userRepos));
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(UserNameActivity.this, "Repositories not found", Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override

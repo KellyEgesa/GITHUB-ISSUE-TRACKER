@@ -32,7 +32,7 @@ public class GitHubUserRepo {
     private String htmlUrl;
     @SerializedName("description")
     @Expose
-    private Object description;
+    private String description;
     @SerializedName("fork")
     @Expose
     private Boolean fork;
@@ -170,7 +170,7 @@ public class GitHubUserRepo {
     private String svnUrl;
     @SerializedName("homepage")
     @Expose
-    private Object homepage;
+    private String homepage;
     @SerializedName("size")
     @Expose
     private Integer size;
@@ -203,7 +203,7 @@ public class GitHubUserRepo {
     private Integer forksCount;
     @SerializedName("mirror_url")
     @Expose
-    private Object mirrorUrl;
+    private String mirrorUrl;
     @SerializedName("archived")
     @Expose
     private Boolean archived;
@@ -215,7 +215,7 @@ public class GitHubUserRepo {
     private Integer openIssuesCount;
     @SerializedName("license")
     @Expose
-    private Object license;
+    private String license;
     @SerializedName("forks")
     @Expose
     private Integer forks;
@@ -312,7 +312,7 @@ public class GitHubUserRepo {
      * @param subscriptionUrl
      * @param homepage
      */
-    public GitHubUserRepo(Integer id, String nodeId, String name, String fullName, Boolean _private, GitHubUserDetails owner, String htmlUrl, Object description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+    public GitHubUserRepo(Integer id, String nodeId, String name, String fullName, Boolean _private, GitHubUserDetails owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, String homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, String mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, String license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
         super();
         this.id = id;
         this.nodeId = nodeId;
@@ -449,7 +449,7 @@ public class GitHubUserRepo {
         return description;
     }
 
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -813,11 +813,11 @@ public class GitHubUserRepo {
         this.svnUrl = svnUrl;
     }
 
-    public Object getHomepage() {
+    public String getHomepage() {
         return homepage;
     }
 
-    public void setHomepage(Object homepage) {
+    public void setHomepage(String homepage) {
         this.homepage = homepage;
     }
 
@@ -901,11 +901,11 @@ public class GitHubUserRepo {
         this.forksCount = forksCount;
     }
 
-    public Object getMirrorUrl() {
+    public String getMirrorUrl() {
         return mirrorUrl;
     }
 
-    public void setMirrorUrl(Object mirrorUrl) {
+    public void setMirrorUrl(String mirrorUrl) {
         this.mirrorUrl = mirrorUrl;
     }
 
@@ -933,11 +933,11 @@ public class GitHubUserRepo {
         this.openIssuesCount = openIssuesCount;
     }
 
-    public Object getLicense() {
+    public String getLicense() {
         return license;
     }
 
-    public void setLicense(Object license) {
+    public void setLicense(String license) {
         this.license = license;
     }
 
