@@ -12,14 +12,15 @@ import com.savannahInformatics.githubissuetracker.Models.GitHubUserRepo;
 import com.savannahInformatics.githubissuetracker.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesListAdapter.RepositoriesViewHolder> {
-    private ArrayList<GitHubUserRepo> mRepositories;
+    private List<GitHubUserRepo> mRepositories;
 
-    public RepositoriesListAdapter(ArrayList<GitHubUserRepo> repos) {
+    public RepositoriesListAdapter(List<GitHubUserRepo> repos) {
         mRepositories = repos;
     }
 
