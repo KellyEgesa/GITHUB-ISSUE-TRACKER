@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import com.savannahInformatics.githubissuetracker.Models.GitHubUserRepo;
 import com.savannahInformatics.githubissuetracker.Network.GitHubClient;
 import com.savannahInformatics.githubissuetracker.Network.GithubIssueTracker;
 import com.savannahInformatics.githubissuetracker.R;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,19 +91,20 @@ public class UserNameActivity extends AppCompatActivity {
 
     private void getRepos(String username) {
         GithubIssueTracker client = GitHubClient.urlRequest();
-        Call<GitHubUserRepo> call = client.getUserRepos(username);
+        Call<List<GitHubUserRepo>> call = client.getUserRepos(username);
 
-        call.enqueue(new Callback<GitHubUserRepo>() {
+        call.enqueue(new Callback<List<GitHubUserRepo>>() {
             @Override
-            public void onResponse(Call<GitHubUserRepo> call, Response<GitHubUserRepo> response) {
+            public void onResponse(Call<List<GitHubUserRepo>> call, Response<List<GitHubUserRepo>> response) {
+                Log.d("Response", response.body().toString());
                 Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
-                List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>)response.body();
-                intent.putExtra("githubUserName", username);
+                List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>) response.body();
+                intent.putExtra("githubUserRepo", Parcels.wrap(userRepos));
                 startActivity(intent);
             }
 
             @Override
-            public void onFailure(Call<GitHubUserRepo> call, Throwable t) {
+            public void onFailure(Call<List<GitHubUserRepo>> call, Throwable t) {
                 Toast.makeText(UserNameActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
