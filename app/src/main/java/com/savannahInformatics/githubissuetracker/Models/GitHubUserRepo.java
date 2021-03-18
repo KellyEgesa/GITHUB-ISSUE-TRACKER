@@ -446,7 +446,7 @@ public class GitHubUserRepo {
         this.htmlUrl = htmlUrl;
     }
 
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
