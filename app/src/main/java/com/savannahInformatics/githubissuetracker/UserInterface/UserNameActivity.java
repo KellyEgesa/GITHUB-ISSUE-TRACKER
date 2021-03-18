@@ -63,17 +63,17 @@ public class UserNameActivity extends AppCompatActivity {
         call.enqueue(new Callback<GitHubUserDetails>() {
             @Override
             public void onResponse(Call<GitHubUserDetails> call, Response<GitHubUserDetails> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     getRepos(username, response.body());
-                }
-                else {
+                } else {
                     Toast.makeText(UserNameActivity.this, "User not Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserNameActivity.this, String.valueOf(response.code()), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GitHubUserDetails> call, Throwable t) {
-                Toast.makeText(UserNameActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserNameActivity.this, "Something went wrong1", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -96,20 +96,22 @@ public class UserNameActivity extends AppCompatActivity {
 
     private void getRepos(String username, GitHubUserDetails userDetails) {
         GithubIssueTracker client = GitHubClient.urlRequest();
-        Call<List<GitHubUserRepo>> call = client.getUserRepos(username);
+
+        Call call = client.getUserRepos(username);
 
         call.enqueue(new Callback<List<GitHubUserRepo>>() {
             @Override
             public void onResponse(Call<List<GitHubUserRepo>> call, Response<List<GitHubUserRepo>> response) {
-                if(response.isSuccessful()){
-                    Log.d("Response", response.body().toString());
+                if (response.isSuccessful()) {
+                    for (GitHubUserRepo gitHubUserRepo : response.body()) {
+                        Log.d("ResponseError", gitHubUserRepo.getFullName());
+                    }
                     Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
                     List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>) response.body();
                     intent.putExtra("githubUserDetails", Parcels.wrap(userDetails));
                     intent.putExtra("githubUserRepo", Parcels.wrap(userRepos));
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(UserNameActivity.this, "Repositories not found", Toast.LENGTH_LONG).show();
                 }
 
@@ -117,7 +119,10 @@ public class UserNameActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<GitHubUserRepo>> call, Throwable t) {
-                Toast.makeText(UserNameActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+                Log.d("ResponseError", call.request().url().toString());
+
+                Toast.makeText(UserNameActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
