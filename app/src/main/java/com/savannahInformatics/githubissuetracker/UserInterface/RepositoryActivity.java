@@ -52,7 +52,8 @@ public class RepositoryActivity extends AppCompatActivity {
 
         setUserDetails();
         setRecyclerView();
-=    }
+
+    }
 
     public void setRecyclerView() {
         if (gotRepos) {
