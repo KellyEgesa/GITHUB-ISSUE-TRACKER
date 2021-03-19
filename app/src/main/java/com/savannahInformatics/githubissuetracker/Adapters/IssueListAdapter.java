@@ -65,7 +65,7 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.Issu
             mStatus.setText(gitHubRepoIssue.getState());
             mTitle.setText(gitHubRepoIssue.getTitle());
             mUserName.setText(gitHubRepoIssue.getUser().getLogin());
-            mComments.setText(gitHubRepoIssue.getComments());
+            mComments.setText(String.valueOf(gitHubRepoIssue.getComments()));
         }
     }
 

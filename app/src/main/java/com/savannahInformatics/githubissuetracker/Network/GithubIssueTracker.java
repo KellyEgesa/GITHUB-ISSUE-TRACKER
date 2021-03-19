@@ -18,6 +18,6 @@ public interface GithubIssueTracker {
     @GET("users/{GithubUserName}/repos" + Constants.ACCESS_TOKEN)
     Call<List<GitHubUserRepo>> getUserRepos(@Path("GithubUserName") String GithubUserName);
 
-    @GET("repos/{username}/{repoName}/issues")
+    @GET("repos/{GithubUserName}/{repoName}/issues")
     Call<List<GitHubRepoIssue>> getRepoIssues(@Path("GithubUserName") String GithubUserName, @Path("repoName") String repoName);
 }

@@ -63,6 +63,6 @@ public class RepositoryActivity extends AppCompatActivity {
             mTextViewUserName.setText(userDetails.getLogin());
         }
         mTextViewBio.setText(userDetails.getBio());
-//        mTextViewRepositories.setText(userDetails.getPublicRepos());
+        mTextViewRepositories.setText(String.valueOf(userDetails.getPublicRepos()));
     }
 }

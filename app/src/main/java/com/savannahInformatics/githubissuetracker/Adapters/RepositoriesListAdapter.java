@@ -100,14 +100,14 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
 
                                 Intent intent = new Intent(mContext, MainActivity.class);
                                 intent.putExtra("repoIssues", Parcels.wrap(repoIssues));
-                                intent.putExtra("githubUserRepo", gotIssues);
+                                intent.putExtra("hasIssues", gotIssues);
                                 mContext.startActivity(intent);
                             }
                         }
 
                         @Override
                         public void onFailure(Call<List<GitHubRepoIssue>> call, Throwable t) {
-                            Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
