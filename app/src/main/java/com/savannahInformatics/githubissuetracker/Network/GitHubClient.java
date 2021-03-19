@@ -10,7 +10,7 @@ public class GitHubClient {
 
     public static GithubIssueTracker urlRequest(){
         if(retrofit ==null){
-            retrofit = new Retrofit.Builder().baseUrl(Constants.GitHubEndPoint)
+            retrofit = new Retrofit.Builder().baseUrl(Constants.GITHUB_ENDPOINT)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
