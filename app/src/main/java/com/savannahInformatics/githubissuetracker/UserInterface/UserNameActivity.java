@@ -119,10 +119,7 @@ public class UserNameActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<GitHubUserRepo>> call, Throwable t) {
-                t.printStackTrace();
-                Log.d("ResponseError", call.request().url().toString());
-
-                Toast.makeText(UserNameActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(UserNameActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
     }

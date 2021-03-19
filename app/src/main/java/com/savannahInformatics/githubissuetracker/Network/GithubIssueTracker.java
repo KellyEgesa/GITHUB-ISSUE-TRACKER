@@ -20,5 +20,4 @@ public interface GithubIssueTracker {
 
     @GET("repos/{username}/{repoName}/issues")
     Call<List<GitHubRepoIssue>> getRepoIssues(@Path("GithubUserName") String GithubUserName, @Path("repoName") String repoName);
-
 }
