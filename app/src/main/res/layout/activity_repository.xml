@@ -38,12 +38,24 @@
                 android:layout_weight="1"
                 android:text="Builder and Designer" />
 
-            <TextView
-                android:id="@+id/textViewRepositoriesNumber"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Repositories: 44"
-                android:textAlignment="textEnd" />
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Number of Repositories: " />
+
+                <TextView
+                    android:id="@+id/textViewRepositoriesNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="44" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -53,5 +65,28 @@
         android:id="@+id/recyclerViewRepos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#C2CED1" />
+        android:background="#C2CED1"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/alternativeLayoutRepos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C2E6E6"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="There isn't any public repositories yet." />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </LinearLayout>

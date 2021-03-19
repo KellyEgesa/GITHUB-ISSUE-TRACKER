@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.savannahInformatics.githubissuetracker.Adapters.RepositoriesListAdapter;
@@ -32,8 +34,11 @@ public class RepositoryActivity extends AppCompatActivity {
     ImageView mImageViewAvatar;
     @BindView(R.id.recyclerViewRepos)
     RecyclerView mRecyclerViewRepos;
+    @BindView(R.id.alternativeLayoutRepos)
+    RelativeLayout mAlternativeLayoutRepos;
     GitHubUserDetails userDetails;
     List<GitHubUserRepo> userRepos;
+    Boolean gotRepos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +48,28 @@ public class RepositoryActivity extends AppCompatActivity {
 
         userDetails = Parcels.unwrap(getIntent().getParcelableExtra("githubUserDetails"));
         userRepos = Parcels.unwrap(getIntent().getParcelableExtra("githubUserRepo"));
+        gotRepos = getIntent().getBooleanExtra("hasRepos", false);
 
-
-        RepositoriesListAdapter repositoriesListAdapter = new RepositoriesListAdapter(userRepos);
-        mRecyclerViewRepos.setAdapter(repositoriesListAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RepositoryActivity.this);
-        mRecyclerViewRepos.setLayoutManager(layoutManager);
         setUserDetails();
+        setRecyclerView();
+=    }
 
+    public void setRecyclerView() {
+        if (gotRepos) {
+            mAlternativeLayoutRepos.setVisibility(View.GONE);
+            mRecyclerViewRepos.setVisibility(View.VISIBLE);
+            RepositoriesListAdapter repositoriesListAdapter = new RepositoriesListAdapter(userRepos);
+            mRecyclerViewRepos.setAdapter(repositoriesListAdapter);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RepositoryActivity.this);
+            mRecyclerViewRepos.setLayoutManager(layoutManager);
+        }
     }
 
     public void setUserDetails() {
-        if (!userDetails.getAvatarUrl().isEmpty()) {
+        if (userDetails.getAvatarUrl() != null) {
             Picasso.get().load(userDetails.getAvatarUrl()).into(mImageViewAvatar);
         }
-        if (!userDetails.getName().isEmpty()) {
+        if (userDetails.getName() != null) {
             mTextViewUserName.setText(userDetails.getName());
         } else {
             mTextViewUserName.setText(userDetails.getLogin());

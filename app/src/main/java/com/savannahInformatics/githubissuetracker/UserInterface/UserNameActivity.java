@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.savannahInformatics.githubissuetracker.Models.GitHubRepoIssue;
 import com.savannahInformatics.githubissuetracker.Models.GitHubUserDetails;
 import com.savannahInformatics.githubissuetracker.Models.GitHubUserRepo;
 import com.savannahInformatics.githubissuetracker.Network.GitHubClient;
@@ -58,6 +59,7 @@ public class UserNameActivity extends AppCompatActivity {
             return;
         }
 
+        progressDialog.show();
         GithubIssueTracker client = GitHubClient.urlRequest();
         Call<GitHubUserDetails> call = client.checkUser(username);
         call.enqueue(new Callback<GitHubUserDetails>() {
@@ -66,6 +68,7 @@ public class UserNameActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     getRepos(username, response.body());
                 } else {
+                    progressDialog.dismiss();
                     Toast.makeText(UserNameActivity.this, "User not Found", Toast.LENGTH_LONG).show();
                     Toast.makeText(UserNameActivity.this, String.valueOf(response.code()), Toast.LENGTH_LONG).show();
                 }
@@ -73,6 +76,7 @@ public class UserNameActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GitHubUserDetails> call, Throwable t) {
+                progressDialog.dismiss();
                 Toast.makeText(UserNameActivity.this, "Something went wrong1", Toast.LENGTH_LONG).show();
             }
         });
@@ -89,12 +93,14 @@ public class UserNameActivity extends AppCompatActivity {
 
     private void loadingScreen() {
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Searching");
+        progressDialog.setTitle("Looking for User");
         progressDialog.setMessage("Searching for user with the given username");
         progressDialog.setCancelable(false);
     }
 
     private void getRepos(String username, GitHubUserDetails userDetails) {
+        loadingScreenRepos();
+
         GithubIssueTracker client = GitHubClient.urlRequest();
 
         Call call = client.getUserRepos(username);
@@ -103,15 +109,21 @@ public class UserNameActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<GitHubUserRepo>> call, Response<List<GitHubUserRepo>> response) {
                 if (response.isSuccessful()) {
-                    for (GitHubUserRepo gitHubUserRepo : response.body()) {
-                        Log.d("ResponseError", gitHubUserRepo.getFullName());
+                    progressDialog.dismiss();
+
+                    Boolean gotRepos = false;
+                    if (response.body().size() > 0) {
+                        gotRepos = true;
                     }
+
                     Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
                     List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>) response.body();
                     intent.putExtra("githubUserDetails", Parcels.wrap(userDetails));
+                    intent.putExtra("hasRepos", gotRepos);
                     intent.putExtra("githubUserRepo", Parcels.wrap(userRepos));
                     startActivity(intent);
                 } else {
+                    progressDialog.dismiss();
                     Toast.makeText(UserNameActivity.this, "Repositories not found", Toast.LENGTH_LONG).show();
                 }
 
@@ -124,5 +136,9 @@ public class UserNameActivity extends AppCompatActivity {
         });
     }
 
+    private void loadingScreenRepos() {
+        progressDialog.setTitle("Retrieving Repositories");
+        progressDialog.setMessage("Retrieving Repositories associated the given username");
+    }
 
 }
