@@ -1,6 +1,7 @@
 package com.savannahInformatics.githubissuetracker.Network;
 
 import com.savannahInformatics.githubissuetracker.Constants;
+import com.savannahInformatics.githubissuetracker.Models.GitHubRepoIssue;
 import com.savannahInformatics.githubissuetracker.Models.GitHubUserDetails;
 import com.savannahInformatics.githubissuetracker.Models.GitHubUserRepo;
 
@@ -18,6 +19,6 @@ public interface GithubIssueTracker {
     Call<List<GitHubUserRepo>> getUserRepos(@Path("GithubUserName") String GithubUserName);
 
     @GET("repos/{username}/{repoName}/issues")
-    Call<List>
+    Call<List<GitHubRepoIssue>> getRepoIssues(@Path("GithubUserName") String GithubUserName, @Path("repoName") String repoName);
 
 }
