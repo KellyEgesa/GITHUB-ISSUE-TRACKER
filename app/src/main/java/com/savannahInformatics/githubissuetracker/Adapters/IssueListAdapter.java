@@ -43,6 +43,11 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.Issu
         return mRepoIssues.size();
     }
 
+    public void updateList(List<GitHubRepoIssue> repoIssues) {
+        mRepoIssues = repoIssues;
+        notifyDataSetChanged();
+    }
+
     public class IssueViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.textViewDateIssue)
         TextView mIssueDate;

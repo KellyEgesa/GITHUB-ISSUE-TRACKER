@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.savannahInformatics.githubissuetracker.Adapters.IssueListAdapter;
 import com.savannahInformatics.githubissuetracker.Models.GitHubRepoIssue;
@@ -15,6 +17,7 @@ import com.savannahInformatics.githubissuetracker.R;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerViewIssues;
     @BindView(R.id.alternativeLayout)
     RelativeLayout alternativeLayout;
+    @BindView(R.id.searchViewIssues)
+    SearchView mSearch;
     List<GitHubRepoIssue> repoIssues;
+    IssueListAdapter issueListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +45,33 @@ public class MainActivity extends AppCompatActivity {
         if (gotIssues) {
             alternativeLayout.setVisibility(View.GONE);
             mRecyclerViewIssues.setVisibility(View.VISIBLE);
-            IssueListAdapter issueListAdapter = new IssueListAdapter(repoIssues);
+            issueListAdapter = new IssueListAdapter(repoIssues);
             mRecyclerViewIssues.setAdapter(issueListAdapter);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
             mRecyclerViewIssues.setLayoutManager(layoutManager);
+            mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    filterIssues(newText);
+                    return false;
+                }
+            });
         }
 
+    }
+
+    private void filterIssues(String query) {
+        List<GitHubRepoIssue> tempRepoIssue = new ArrayList<>();
+        for (GitHubRepoIssue title : repoIssues) {
+            if (title.getTitle().toLowerCase().contains(query)) {
+                tempRepoIssue.add(title);
+            }
+        }
+        issueListAdapter.updateList(tempRepoIssue);
     }
 }

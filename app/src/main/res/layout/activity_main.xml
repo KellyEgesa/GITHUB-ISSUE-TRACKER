@@ -23,8 +23,9 @@
         android:text="Tuesday , 21 November" />
 
     <SearchView
+        android:id="@+id/searchViewIssues"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
     </SearchView>
 
