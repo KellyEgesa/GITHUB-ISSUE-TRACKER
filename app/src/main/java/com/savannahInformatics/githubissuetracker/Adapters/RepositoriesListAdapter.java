@@ -1,6 +1,7 @@
 package com.savannahInformatics.githubissuetracker.Adapters;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -70,11 +71,15 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
         @BindView(R.id.repoList)
         LinearLayout mRepo;
         private Context mContext;
+        private ProgressDialog progressDialog;
+
 
         public RepositoriesViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+
+            loadingScreen();
         }
 
         public void bindRepositories(GitHubUserRepo gitHubUserRepo) {
@@ -85,19 +90,20 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
             mRepo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    progressDialog.show();
                     GithubIssueTracker client = GitHubClient.urlRequest();
                     Call<List<GitHubRepoIssue>> call = client.getRepoIssues(gitHubUserRepo.getOwner().getLogin(), gitHubUserRepo.getName());
 
                     call.enqueue(new Callback<List<GitHubRepoIssue>>() {
                         @Override
                         public void onResponse(Call<List<GitHubRepoIssue>> call, Response<List<GitHubRepoIssue>> response) {
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 Boolean gotIssues = false;
-                                if(response.body().size()>0){
+                                if (response.body().size() > 0) {
                                     gotIssues = true;
                                 }
                                 List<GitHubRepoIssue> repoIssues = (ArrayList<GitHubRepoIssue>) response.body();
-
+                                progressDialog.dismiss();
                                 Intent intent = new Intent(mContext, MainActivity.class);
                                 intent.putExtra("repoIssues", Parcels.wrap(repoIssues));
                                 intent.putExtra("hasIssues", gotIssues);
@@ -107,11 +113,19 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
 
                         @Override
                         public void onFailure(Call<List<GitHubRepoIssue>> call, Throwable t) {
+                            progressDialog.dismiss();
                             Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
             });
+        }
+
+        private void loadingScreen() {
+            progressDialog = new ProgressDialog(mContext);
+            progressDialog.setTitle("Retrieving Issues");
+            progressDialog.setMessage("Retrieving issues for the repository selected");
+            progressDialog.setCancelable(false);
         }
     }
 }

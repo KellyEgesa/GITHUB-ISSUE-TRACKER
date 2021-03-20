@@ -17,8 +17,14 @@ import com.savannahInformatics.githubissuetracker.R;
 
 import org.parceler.Parcels;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     SearchView mSearch;
     List<GitHubRepoIssue> repoIssues;
     IssueListAdapter issueListAdapter;
+    Boolean gotIssues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +46,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Boolean gotIssues = getIntent().getBooleanExtra("hasIssues", false);
+        mSearch.setIconified(false);
+
+        gotIssues = getIntent().getBooleanExtra("hasIssues", false);
         repoIssues = Parcels.unwrap(getIntent().getParcelableExtra("repoIssues"));
 
+        setUpIssues();
+
+        Calendar calendar = Calendar.getInstance();
+
+        String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+        Toast.makeText(MainActivity.this, "Date " + date, Toast.LENGTH_LONG).show();
+
+    }
+
+    private void setUpIssues() {
         if (gotIssues) {
             alternativeLayout.setVisibility(View.GONE);
             mRecyclerViewIssues.setVisibility(View.VISIBLE);
@@ -62,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
+
 
     private void filterIssues(String query) {
         List<GitHubRepoIssue> tempRepoIssue = new ArrayList<>();

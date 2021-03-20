@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,9 +37,9 @@ public class RepositoryActivity extends AppCompatActivity {
     RecyclerView mRecyclerViewRepos;
     @BindView(R.id.alternativeLayoutRepos)
     RelativeLayout mAlternativeLayoutRepos;
-    GitHubUserDetails userDetails;
-    List<GitHubUserRepo> userRepos;
-    Boolean gotRepos;
+    private GitHubUserDetails userDetails;
+    private List<GitHubUserRepo> userRepos;
+    private Boolean gotRepos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class RepositoryActivity extends AppCompatActivity {
 
         setUserDetails();
         setRecyclerView();
+
 
     }
 
@@ -78,4 +80,5 @@ public class RepositoryActivity extends AppCompatActivity {
         mTextViewBio.setText(userDetails.getBio());
         mTextViewRepositories.setText(String.valueOf(userDetails.getPublicRepos()));
     }
+
 }
