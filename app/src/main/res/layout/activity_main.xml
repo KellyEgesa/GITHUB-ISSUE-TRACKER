@@ -46,7 +46,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Date" />
+                android:text="Date"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ic_baseline_keyboard_arrow_down_24" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,7 +67,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="FilterBy" />
+                android:text="FilterBy "
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerFilterBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
         </LinearLayout>
 
     </LinearLayout>

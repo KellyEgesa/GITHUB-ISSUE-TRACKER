@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.savannahInformatics.githubissuetracker.Models.GitHubRepoIssue;
 import com.savannahInformatics.githubissuetracker.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,6 +62,8 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.Issu
         TextView mUserName;
         @BindView(R.id.textViewCommentsIssue)
         TextView mComments;
+        @BindView(R.id.textViewIssueCode)
+        TextView mIssueCode;
 
         public IssueViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,7 +71,18 @@ public class IssueListAdapter extends RecyclerView.Adapter<IssueListAdapter.Issu
         }
 
         public void bindIssues(GitHubRepoIssue gitHubRepoIssue) {
-            mIssueDate.setText(gitHubRepoIssue.getCreatedAt());
+            SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
+            Date d = null;
+            try {
+                d = input.parse(gitHubRepoIssue.getCreatedAt());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            String issueCode = "#" + gitHubRepoIssue.getNumber();
+            mIssueCode.setText(issueCode);
+            mIssueDate.setText(output.format(d));
             mStatus.setText(gitHubRepoIssue.getState());
             mTitle.setText(gitHubRepoIssue.getTitle());
             mUserName.setText(gitHubRepoIssue.getUser().getLogin());
