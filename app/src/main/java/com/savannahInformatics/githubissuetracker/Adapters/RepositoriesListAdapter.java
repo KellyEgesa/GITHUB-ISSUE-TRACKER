@@ -25,7 +25,10 @@ import com.savannahInformatics.githubissuetracker.UserInterface.UserNameActivity
 
 import org.parceler.Parcels;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,6 +73,8 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
         TextView mDescription;
         @BindView(R.id.repoList)
         LinearLayout mRepo;
+        @BindView(R.id.textViewDate)
+        TextView mDate;
         private Context mContext;
         private ProgressDialog progressDialog;
 
@@ -119,6 +124,19 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
                     });
                 }
             });
+
+            SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
+            Date d = null;
+            try {
+                d = input.parse(gitHubUserRepo.getUpdatedAt());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            String updatedDate = "Updated on: " + output.format(d);
+            mDate.setText(updatedDate);
+
         }
 
         private void loadingScreen() {

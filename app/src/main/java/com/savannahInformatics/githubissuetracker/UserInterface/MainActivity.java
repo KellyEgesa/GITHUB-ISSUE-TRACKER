@@ -23,8 +23,11 @@ import com.savannahInformatics.githubissuetracker.R;
 import org.parceler.Parcels;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,9 +44,12 @@ public class MainActivity extends AppCompatActivity {
     TextView mDate;
     @BindView(R.id.spinnerFilterBy)
     Spinner mFilterBy;
+    @BindView(R.id.spinnerDate)
+    Spinner mDateFilter;
     List<GitHubRepoIssue> repoIssues;
     IssueListAdapter issueListAdapter;
     Boolean gotIssues;
+    Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,33 +60,36 @@ public class MainActivity extends AppCompatActivity {
         gotIssues = getIntent().getBooleanExtra("hasIssues", false);
         repoIssues = Parcels.unwrap(getIntent().getParcelableExtra("repoIssues"));
 
-        setUpIssues();
+
         setUpDate();
-        setUpFilterBy();
+
+        if (gotIssues) {
+            setUpIssues();
+            setUpFilterBy();
+            setUpDateFilter();
+        }
 
     }
 
     private void setUpIssues() {
-        if (gotIssues) {
-            alternativeLayout.setVisibility(View.GONE);
-            mRecyclerViewIssues.setVisibility(View.VISIBLE);
-            issueListAdapter = new IssueListAdapter(repoIssues);
-            mRecyclerViewIssues.setAdapter(issueListAdapter);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-            mRecyclerViewIssues.setLayoutManager(layoutManager);
-            mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
+        alternativeLayout.setVisibility(View.GONE);
+        mRecyclerViewIssues.setVisibility(View.VISIBLE);
+        issueListAdapter = new IssueListAdapter(repoIssues);
+        mRecyclerViewIssues.setAdapter(issueListAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        mRecyclerViewIssues.setLayoutManager(layoutManager);
+        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    filterIssues(newText);
-                    return false;
-                }
-            });
-        }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterIssues(newText);
+                return false;
+            }
+        });
     }
 
     private void filterIssues(String query) {
@@ -96,9 +105,11 @@ public class MainActivity extends AppCompatActivity {
     private void setUpDate() {
         Calendar calendar = Calendar.getInstance();
 
-        String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        date = calendar.getTime();
 
-        mDate.setText(date.replace("2021", ""));
+        String stringDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+        mDate.setText(stringDate.replace("2021", ""));
 
     }
 
@@ -146,6 +157,91 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } else {
                             if (title.getComments() > 10) {
+                                tempRepoIssue.add(title);
+                            }
+                        }
+                    }
+                }
+
+                issueListAdapter.updateList(tempRepoIssue);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    private void setUpDateFilter() {
+        String[] arrayFilterDate = new String[]{"This week", "This Month", "This Year", "Forever"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, android.R.id.text1);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mDateFilter.setAdapter(adapter);
+
+        for (String filterOptions : arrayFilterDate
+        ) {
+            adapter.add(filterOptions);
+
+        }
+        adapter.notifyDataSetChanged();
+
+
+        mDateFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) view).setText(null);
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                int week = cal.get(Calendar.WEEK_OF_YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int year = cal.get(Calendar.YEAR);
+
+                int dateFromIndex = 3;
+                List<GitHubRepoIssue> tempRepoIssue = new ArrayList<>();
+
+                if (position != 3) {
+                    dateFromIndex = position;
+                }
+
+                if (dateFromIndex == 3) {
+                    tempRepoIssue = repoIssues;
+                } else {
+                    for (GitHubRepoIssue title : repoIssues) {
+                        Date d = null;
+                        try {
+                            d = input.parse(title.getCreatedAt());
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (dateFromIndex == 0) {
+                            Calendar calIssue = Calendar.getInstance();
+                            calIssue.setTime(d);
+
+                            int weekIssue = calIssue.get(Calendar.WEEK_OF_YEAR);
+                            if (week == weekIssue) {
+                                tempRepoIssue.add(title);
+                            }
+                        } else if (dateFromIndex == 1) {
+                            Calendar calIssue = Calendar.getInstance();
+                            calIssue.setTime(d);
+
+                            int monthIssue = calIssue.get(Calendar.MONTH);
+                            if (month == monthIssue) {
+                                tempRepoIssue.add(title);
+                            }
+                        } else {
+                            Calendar calIssue = Calendar.getInstance();
+                            calIssue.setTime(d);
+
+                            int yearIssue = calIssue.get(Calendar.YEAR);
+                            if (year == yearIssue) {
                                 tempRepoIssue.add(title);
                             }
                         }
