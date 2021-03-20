@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.savannahInformatics.githubissuetracker.Adapters.IssueListAdapter;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout alternativeLayout;
     @BindView(R.id.searchViewIssues)
     SearchView mSearch;
+    @BindView(R.id.textViewDate)
+    TextView mDate;
     List<GitHubRepoIssue> repoIssues;
     IssueListAdapter issueListAdapter;
     Boolean gotIssues;
@@ -52,12 +55,7 @@ public class MainActivity extends AppCompatActivity {
         repoIssues = Parcels.unwrap(getIntent().getParcelableExtra("repoIssues"));
 
         setUpIssues();
-
-        Calendar calendar = Calendar.getInstance();
-
-        String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-
-        Toast.makeText(MainActivity.this, "Date " + date, Toast.LENGTH_LONG).show();
+        setUpDate();
 
     }
 
@@ -84,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void filterIssues(String query) {
         List<GitHubRepoIssue> tempRepoIssue = new ArrayList<>();
         for (GitHubRepoIssue title : repoIssues) {
@@ -93,5 +90,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         issueListAdapter.updateList(tempRepoIssue);
+    }
+
+    private void setUpDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+        mDate.setText(date.replace("2021", ""));
+
     }
 }
