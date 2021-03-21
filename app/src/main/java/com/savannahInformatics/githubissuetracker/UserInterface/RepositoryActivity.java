@@ -37,6 +37,9 @@ public class RepositoryActivity extends AppCompatActivity {
     RecyclerView mRecyclerViewRepos;
     @BindView(R.id.alternativeLayoutRepos)
     RelativeLayout mAlternativeLayoutRepos;
+    @BindView(R.id.imageViewRepoToolBar)
+    ImageView mBackButton;
+
     private GitHubUserDetails userDetails;
     private List<GitHubUserRepo> userRepos;
     private Boolean gotRepos;
@@ -46,6 +49,13 @@ public class RepositoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository);
         ButterKnife.bind(this);
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         userDetails = Parcels.unwrap(getIntent().getParcelableExtra("githubUserDetails"));
         userRepos = Parcels.unwrap(getIntent().getParcelableExtra("githubUserRepo"));

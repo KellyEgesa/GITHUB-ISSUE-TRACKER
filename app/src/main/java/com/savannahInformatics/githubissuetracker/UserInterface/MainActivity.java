@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     Spinner mFilterBy;
     @BindView(R.id.spinnerDate)
     Spinner mDateFilter;
+    @BindView(R.id.imageViewIssueToolBar)
+    ImageView mBackButton;
+
     List<GitHubRepoIssue> repoIssues;
     IssueListAdapter issueListAdapter;
     Boolean gotIssues;
@@ -56,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         gotIssues = getIntent().getBooleanExtra("hasIssues", false);
         repoIssues = Parcels.unwrap(getIntent().getParcelableExtra("repoIssues"));
