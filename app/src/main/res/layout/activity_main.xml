@@ -10,87 +10,109 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingStart="14dp"
+        android:paddingTop="7dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Today"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textAlignment="viewStart"
+                android:textColor="@color/textHeader"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textViewDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tuesday , 21 November" />
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/ic_settings" />
+
         </LinearLayout>
-    </LinearLayout>
 
-    <SearchView
-        android:id="@+id/searchViewIssues"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#9A2323"
-        android:iconifiedByDefault="true">
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tuesday , 21 November"
+            android:textSize="16sp" />
 
-    </SearchView>
+        <SearchView
+            android:id="@+id/searchViewIssues"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/search_background"
+            android:iconifiedByDefault="true"
+            android:searchHintIcon="@drawable/ic_baseline_search_24"
+            android:searchIcon="@drawable/ic_baseline_search_24">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        </SearchView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Date"
-                android:textSize="18sp" />
+                android:layout_marginEnd="14dp"
+                android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinnerDate"
-                android:layout_width="25dp"
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Date"
+                    android:textColor="@color/textAlt1"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <Spinner
+                    android:id="@+id/spinnerDate"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/ic_baseline_keyboard_arrow_down_24"
-                android:visibility="visible" />
-        </LinearLayout>
+                android:layout_marginStart="14dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="visible">
+                <TextView
+                    android:id="@+id/FilterTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="FilterBy "
+                    android:textColor="@color/textAlt1"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/FilterTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="FilterBy "
-                android:textSize="18sp" />
+                <Spinner
+                    android:id="@+id/spinnerFilterBy"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
-            <Spinner
-                android:id="@+id/spinnerFilterBy"
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -100,7 +122,7 @@
         android:id="@+id/recyclerViewIssues"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#C2E6E6"
+        android:background="@color/primaryAlt1"
         android:visibility="gone">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -109,22 +131,23 @@
         android:id="@+id/alternativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#C2E6E6"
+        android:background="@color/primaryAlt1"
         android:gravity="center">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="14dp"
             android:visibility="visible">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="14dp"
                 android:text="There are no Issues in this repository" />
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
 </LinearLayout>

@@ -6,5 +6,8 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="textHeader">#292E33</color>
+    <color name="primaryAlt1">#C1D9EE</color>
+    <color name="textAlt1">#2542C9</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
