@@ -44,7 +44,7 @@
             android:layout_weight="8"
             android:text="Updated 120 days ago"
             android:textAlignment="textEnd"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
 
