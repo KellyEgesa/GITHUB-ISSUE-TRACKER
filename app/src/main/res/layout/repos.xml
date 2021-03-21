@@ -5,14 +5,20 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="7dp"
     android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingStart="14dp"
+    android:paddingTop="7dp"
+    android:paddingEnd="14dp"
+    android:paddingBottom="7dp">
 
     <TextView
         android:id="@+id/textViewRepositoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="REPOSITORY NAME"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/textHeader"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,15 +30,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Java" />
+            android:background="@drawable/language"
+            android:padding="3.5dp"
+            android:text="Java"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_weight="8"
             android:text="Updated 120 days ago"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView

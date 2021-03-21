@@ -20,13 +20,13 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:orientation="horizontal">
+            android:layout_weight="10">
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Opened "
                 android:textSize="12sp" />
 
@@ -34,6 +34,7 @@
                 android:id="@+id/textViewDateIssue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="29 Oct 2020"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -45,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/open_background"
+            android:padding="3.5dp"
             android:text="Open"
             android:textAlignment="center"
             android:textColor="@color/white" />
@@ -58,7 +60,7 @@
         android:layout_weight="1"
         android:text="TextView"
         android:textAlignment="viewStart"
-        android:textColor="#EFB60A"
+        android:textColor="@color/background"
         android:textSize="16sp" />
 
     <TextView
