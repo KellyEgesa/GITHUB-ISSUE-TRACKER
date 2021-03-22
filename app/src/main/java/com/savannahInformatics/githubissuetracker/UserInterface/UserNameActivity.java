@@ -114,7 +114,7 @@ public class UserNameActivity extends AppCompatActivity {
                     if (response.body().size() > 0) {
                         gotRepos = true;
                     }
-
+                    Log.d("REsponseBody", String.valueOf(response.body().size()));
                     Intent intent = new Intent(UserNameActivity.this, RepositoryActivity.class);
                     List<GitHubUserRepo> userRepos = (ArrayList<GitHubUserRepo>) response.body();
                     intent.putExtra("githubUserDetails", Parcels.wrap(userDetails));
