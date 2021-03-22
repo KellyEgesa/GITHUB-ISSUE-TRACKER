@@ -10,12 +10,13 @@
     tools:context=".UserInterface.UserNameActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewUserName"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:srcCompat="@drawable/logo" />
 
     <TextView
+        android:id="@+id/userNameHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="21dp"
@@ -26,7 +27,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewEnterNameUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Kindly enter a github Username"
@@ -48,6 +49,8 @@
         android:id="@+id/proceedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#ADC8DF"
+        android:elevation="100dp"
         android:text="search"
         app:cornerRadius="40dp" />
 

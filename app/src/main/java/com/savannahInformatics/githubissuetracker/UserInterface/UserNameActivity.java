@@ -70,7 +70,6 @@ public class UserNameActivity extends AppCompatActivity {
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(UserNameActivity.this, "User not Found", Toast.LENGTH_LONG).show();
-                    Toast.makeText(UserNameActivity.this, String.valueOf(response.code()), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -109,8 +108,6 @@ public class UserNameActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<GitHubUserRepo>> call, Response<List<GitHubUserRepo>> response) {
                 if (response.isSuccessful()) {
-                    progressDialog.dismiss();
-
                     Boolean gotRepos = false;
                     if (response.body().size() > 0) {
                         gotRepos = true;
@@ -121,6 +118,7 @@ public class UserNameActivity extends AppCompatActivity {
                     intent.putExtra("githubUserDetails", Parcels.wrap(userDetails));
                     intent.putExtra("hasRepos", gotRepos);
                     intent.putExtra("githubUserRepo", Parcels.wrap(userRepos));
+                    progressDialog.dismiss();
                     startActivity(intent);
                 } else {
                     progressDialog.dismiss();

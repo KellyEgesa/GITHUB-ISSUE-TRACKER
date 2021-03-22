@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpDateFilter() {
-        String[] arrayFilterDate = new String[]{"This week", "This Month", "This Year", "Forever"};
+        String[] arrayFilterDate = new String[]{"All", "This Week", "This Month", "This Year"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, android.R.id.text1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -212,14 +212,14 @@ public class MainActivity extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int year = cal.get(Calendar.YEAR);
 
-                int dateFromIndex = 3;
+                int dateFromIndex = 0;
                 List<GitHubRepoIssue> tempRepoIssue = new ArrayList<>();
 
-                if (position != 3) {
+                if (position > 0) {
                     dateFromIndex = position;
                 }
 
-                if (dateFromIndex == 3) {
+                if (dateFromIndex == 0) {
                     tempRepoIssue = repoIssues;
                 } else {
                     for (GitHubRepoIssue title : repoIssues) {
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        if (dateFromIndex == 0) {
+                        if (dateFromIndex == 1) {
                             Calendar calIssue = Calendar.getInstance();
                             calIssue.setTime(d);
 
@@ -239,12 +239,13 @@ public class MainActivity extends AppCompatActivity {
                             if (week == weekIssue) {
                                 tempRepoIssue.add(title);
                             }
-                        } else if (dateFromIndex == 1) {
+                        } else if (dateFromIndex == 2) {
                             Calendar calIssue = Calendar.getInstance();
                             calIssue.setTime(d);
 
                             int monthIssue = calIssue.get(Calendar.MONTH);
-                            if (month == monthIssue) {
+                            int yearIssue = calIssue.get(Calendar.YEAR);
+                            if (month == monthIssue && year == yearIssue) {
                                 tempRepoIssue.add(title);
                             }
                         } else {

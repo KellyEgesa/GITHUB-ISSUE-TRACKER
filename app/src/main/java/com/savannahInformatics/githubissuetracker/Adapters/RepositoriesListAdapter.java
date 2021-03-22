@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +90,12 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
 
         public void bindRepositories(GitHubUserRepo gitHubUserRepo) {
             mTextViewRepositoryName.setText(gitHubUserRepo.getName());
-            mLanguageUsed.setText(gitHubUserRepo.getLanguage());
+            if (gitHubUserRepo.getLanguage() == null) {
+                mLanguageUsed.setBackgroundResource(android.R.color.transparent);
+            } else {
+                mLanguageUsed.setText(gitHubUserRepo.getLanguage());
+
+            }
             mDescription.setText(gitHubUserRepo.getDescription());
 
             mRepo.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +114,10 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
                                     gotIssues = true;
                                 }
                                 List<GitHubRepoIssue> repoIssues = (ArrayList<GitHubRepoIssue>) response.body();
-                                progressDialog.dismiss();
                                 Intent intent = new Intent(mContext, MainActivity.class);
                                 intent.putExtra("repoIssues", Parcels.wrap(repoIssues));
                                 intent.putExtra("hasIssues", gotIssues);
+                                progressDialog.dismiss();
                                 mContext.startActivity(intent);
                             }
                         }
@@ -119,6 +125,7 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RepositoriesLi
                         @Override
                         public void onFailure(Call<List<GitHubRepoIssue>> call, Throwable t) {
                             progressDialog.dismiss();
+                            Log.d("Errors", t.getLocalizedMessage());
                             Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
