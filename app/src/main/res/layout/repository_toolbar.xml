@@ -13,7 +13,7 @@
         app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewRepoHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="14dp"

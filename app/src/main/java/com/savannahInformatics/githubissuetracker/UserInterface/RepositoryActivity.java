@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.savannahInformatics.githubissuetracker.Adapters.RepositoriesListAdapter;
 import com.savannahInformatics.githubissuetracker.Models.GitHubUserDetails;

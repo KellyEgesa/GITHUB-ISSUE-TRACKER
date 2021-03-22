@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.savannahInformatics.githubissuetracker.BuildConfig;
 import com.savannahInformatics.githubissuetracker.R;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,15 +41,15 @@ public class UserNameActivityTest {
         TextView headerUserName = activity.findViewById(R.id.userNameHeader);
         TextView enterTextUserName = activity.findViewById(R.id.textViewEnterNameUserName);
 
+        assertNotNull(headerUserName);
+        assertNotNull(enterTextUserName);
         assertEquals("GITHUB ISSUE TRACKER", headerUserName.getText());
         assertEquals("Kindly enter a github Username", enterTextUserName.getText());
     }
 
-    @Test
-    public void itemsVisible(){
-        TextView headerUserName = activity.findViewById(R.id.userNameHeader);
-        TextView enterTextUserName = activity.findViewById(R.id.textViewEnterNameUserName);
-
+    @After
+    public void tearDown() {
+        activity = null;
     }
 
 

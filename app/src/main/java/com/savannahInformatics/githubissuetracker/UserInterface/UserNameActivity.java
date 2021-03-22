@@ -98,6 +98,8 @@ public class UserNameActivity extends AppCompatActivity {
     }
 
     private void getRepos(String username, GitHubUserDetails userDetails) {
+        progressDialog.dismiss();
+        progressDialog.show();
         loadingScreenRepos();
 
         GithubIssueTracker client = GitHubClient.urlRequest();
