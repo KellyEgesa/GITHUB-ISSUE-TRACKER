@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterIssues(newText);
+                filterIssues(newText.toLowerCase());
                 return false;
             }
         });

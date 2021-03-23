@@ -1,13 +1,11 @@
-# FOOTBALL APP
+# GITHUB ISSUE TRACKER
 
-#### A REFERENCE ANDROID APPLICATION THAT SHOWS INFORMATION ABOUT THE BIG SIX FOOTBALL LEAGUES
+####An android application that allows users to search github usernames, get their repositories and view the issues in the repositories.
 
 #### By **Bartholomew Kelly Egesa**
 
 ## Description
 
-A user can see all the leagues
-A user can the league table.
 
 ## Behavior Driven Development
 
@@ -21,7 +19,7 @@ A user can the league table.
 
 ## Known Bugs
 
-There are no known bugs
+There are currently no known bugs
 
 ## Setup/Installation Requirements
 
@@ -34,6 +32,7 @@ There are no known bugs
 - Press git clone plus the url on the terminal then press center
 - On the terminal and press gradle run
 
+##Running Tests
 
 ## Technologies Used
 
