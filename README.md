@@ -31,7 +31,7 @@ There are currently no known bugs
 - Copy paste the given Url
 - Press git clone plus the url on the terminal then press center.
 - Inorder to run the application one needs to retrieve their own individual access tokens on github. It is then placed in gradle.properties as "GITHUB_API_KEY:***Your individual api Key***"
-##Running Tests
+## Running Tests
 - Once the instructions under Setup/Installation Requirements are done. Right click on app/src/androidTest/java/com/savannahInformatics/githubissuetracker and click run to run the instrumentation tests.
 - Right click on app/src/test/java/com/savannahInformatics/githubissuetracker and click run to run the unit tests.
 
