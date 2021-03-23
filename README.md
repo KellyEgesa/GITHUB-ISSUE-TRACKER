@@ -1,6 +1,6 @@
 # GITHUB ISSUE TRACKER
 
-####An android application that allows users to search github usernames, get their repositories and view the issues in the repositories.
+#### An android application that allows users to search github usernames, get their repositories and view the issues in the repositories.
 
 #### By **Bartholomew Kelly Egesa**
 
@@ -36,15 +36,15 @@ There are currently no known bugs
 - Right click on app/src/test/java/com/savannahInformatics/githubissuetracker and click run to run the unit tests.
 
 ## Technologies Used
-###DEVELOPMENT
+### DEVELOPMENT
 - JAVA
 - ANDROID
 - XML
-###TESTING
+### TESTING
 - ROBOELECTRIC
 - ESPRESSO
 - JUNIT
-###APIS CALL
+### APIS CALL
 - RETROFIT
 
 ## Support and contact details
