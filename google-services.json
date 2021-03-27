@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "924548587198",
+    "project_id": "github-issue-tracker-580ff",
+    "storage_bucket": "github-issue-tracker-580ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924548587198:android:5cf4a6bf35a21b6dc1c8ef",
+        "android_client_info": {
+          "package_name": "com.savannahInformatics.githubissuetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924548587198-v1if2bval0jkeu9cv6q5dj6ejog962nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSMeP6HrvoKiL09nZCXbpcNo6TcL6RGU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924548587198-v1if2bval0jkeu9cv6q5dj6ejog962nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
